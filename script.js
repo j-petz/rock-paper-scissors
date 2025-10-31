@@ -1,7 +1,11 @@
 // Find number between 1 and 99
 let rand = Math.floor(Math.random() * 99 + 1);
 
-console.log(rand);
+console.log(`Random number: ${rand}`);
+
+// Declare variables for userScore and computerScore and set them to 0
+var humanScore = 0;
+var computerScore = 0;
 
 // Create function with the name 'getComputerChoice'
 function getComputerChoice() {
