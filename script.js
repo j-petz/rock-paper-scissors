@@ -19,34 +19,12 @@ function getComputerChoice() {
     }
 }
 
-// Create function for user choice
-function getUserChoice() {
-    // Ask user to enter Rock Paper or Scissors in a Prompt
-    let userChoice = prompt(
-        "Choose Rock, Paper or Scissors",
-        "Which will you choose?"
-        // Transform the input to lowercase
-    ).toLowerCase();
-    //console.log(`User Choice: ${userChoice}`);
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => button.addEventListener("click", getUserChoice));
 
-    // Check if the selection equals one of the terms
-    /* 
-        => This brings up a bug later when the user and computer choice are logged and compared.
-           In that case the user choice is still returning the old (wrong) value and the computer wins.
-    */
-    if (
-        !(
-            userChoice === "rock" ||
-            userChoice === "paper" ||
-            userChoice === "scissors"
-        )
-    ) {
-        // If not, log 'invalid input'
-        console.log("Invalid choice. Please select Rock, Paper or Scissors");
-        // and call the function to get the user choice again (I don't know if this is a good idea – sounds dangerous)
-        getUserChoice();
-    }
-    return userChoice;
+// Create function for user choice
+function getUserChoice(e) {
+    console.log(e.target.textContent.toLowerCase());
 }
 
 // Write function to play a game with 5 rounds
@@ -90,7 +68,7 @@ function playGame() {
 
     // Play 5 rounds where each copy is INVOKED
     playRound(computerSelection(), userSelection());
-    playRound(computerSelection(), userSelection());
+    /* playRound(computerSelection(), userSelection());
     playRound(computerSelection(), userSelection());
     playRound(computerSelection(), userSelection());
     playRound(computerSelection(), userSelection());
@@ -108,7 +86,7 @@ function playGame() {
         console.log(
             `You won ${userScore} and the computer won ${computerScore} out of 5 rounds. It\'s a tie!`
         );
-    }
+    } */
 }
 
 playGame();
