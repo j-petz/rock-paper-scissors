@@ -18,16 +18,15 @@ buttons.forEach((button) => {
 let userScore = 0;
 let computerScore = 0;
 
-let score = document.querySelector("#score");
-score.textContent = `User: ${userScore} || Computer: ${computerScore}`;
-
 let result = document.querySelector("#result");
 result.setAttribute("style", "white-space: pre");
 
-// Write function to play one round
 function playRound(e) {
     let userChoice = e.target.dataset.value;
     let computerChoice = getComputerChoice();
+
+    let score = document.querySelector("#score");
+    score.setAttribute("style", "white-space: pre");
 
     result.textContent = `You chose: ${userChoice}. || The computer chose ${computerChoice}.`;
 
@@ -47,19 +46,14 @@ function playRound(e) {
         result.textContent += `\r\nYou lose this round!`;
         computerScore++;
     }
-}
+    score.textContent = `User: ${userScore} || Computer: ${computerScore}`;
 
-// Declare the final winner
-/* if (userScore > computerScore) {
-    console.log(
-        `You won ${userScore} out of 5 rounds. You are the winner of the match! 🥳`
-    );
-} else if (computerScore > userScore) {
-    console.log(
-        `The computer won ${computerScore} out of 5 rounds. You lose the match ☹️`
-    );
-} else {
-    console.log(
-        `You won ${userScore} and the computer won ${computerScore} out of 5 rounds. It\'s a tie!`
-    );
-} */
+    // Declare the final winner
+    if (userScore == 5) {
+        score.textContent += `\r\nYou won ${userScore} out of 5 rounds.\r\nYou are the winner of the match! 🥳`;
+        buttons.forEach((button) => (button.disabled = true));
+    } else if (computerScore == 5) {
+        score.textContent += `\r\nThe computer won ${computerScore} out of 5 rounds.\r\nYou lose the match ☹️`;
+        buttons.forEach((button) => (button.disabled = true));
+    }
+}
