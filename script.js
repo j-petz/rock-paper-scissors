@@ -1,92 +1,65 @@
-// Create function with the name 'getComputerChoice'
+// Rock, Paper, Scissors Game
 function getComputerChoice() {
-    // Find number between 1 and 99
     let rand = Math.floor(Math.random() * 99 + 1);
-    //console.log(`Random number: ${rand}`);
-
-    // If the number is 33 or less return the value 'Rock'
     if (rand <= 33) {
-        //console.log(`Computer Choice: rock`);
         return "rock";
     } else if (rand <= 66) {
-        // If the number is 66 or less return the value 'Paper'
-        //console.log(`Computer Choice: paper`);
         return "paper";
     } else {
-        // In any other case return the value 'Scissors'
-        //console.log(`Computer Choice: scissors`);
         return "scissors";
     }
 }
 
 const buttons = document.querySelectorAll("button");
-buttons.forEach((button) => button.addEventListener("click", getUserChoice));
+buttons.forEach((button) => {
+    button.addEventListener("click", playRound);
+});
 
-// Create function for user choice
-function getUserChoice(e) {
-    console.log(e.target.textContent.toLowerCase());
-}
+let userScore = 0;
+let computerScore = 0;
 
-// Write function to play a game with 5 rounds
-function playGame() {
-    // Declare variables for userScore and computerScore and set them to 0
-    var userScore = 0;
-    var computerScore = 0;
+let score = document.querySelector("#score");
+score.textContent = `User: ${userScore} || Computer: ${computerScore}`;
 
-    // Write function to play one round
-    function playRound(computerChoice, userChoice) {
-        // Log the user and the computer choice
-        console.log(
-            `You chose: ${userChoice}. The computer chose ${computerChoice}.`
-        );
-        // Compare userChoice and computerChoice
-        if (userChoice === "rock" && computerChoice === "scissors") {
-            // Write the winner to the log
-            console.log("Rock beats Scissors. You won this round!");
-            // Increment the score for the winner by one
-            userScore++;
-        } else if (userChoice === "paper" && computerChoice === "rock") {
-            console.log("Paper beats Rock. You won this round!");
-            userScore++;
-        } else if (userChoice === "scissors" && computerChoice === "paper") {
-            console.log("Scissors beats Paper. You won this round!");
-            userScore++;
-        } else if (userChoice === computerChoice) {
-            console.log("It's a tie!");
-        } else {
-            console.log("You lose this round!");
-            computerScore++;
-        }
-        console.log(
-            `User Score: ${userScore} || Computer Score: ${computerScore}`
-        );
-    }
+let result = document.querySelector("#result");
+result.setAttribute("style", "white-space: pre");
 
-    // Copy the function for user and computer choice
-    const userSelection = getUserChoice;
-    const computerSelection = getComputerChoice;
+// Write function to play one round
+function playRound(e) {
+    let userChoice = e.target.dataset.value;
+    let computerChoice = getComputerChoice();
 
-    // Play 5 rounds where each copy is INVOKED
-    playRound(computerSelection(), userSelection());
-    /* playRound(computerSelection(), userSelection());
-    playRound(computerSelection(), userSelection());
-    playRound(computerSelection(), userSelection());
-    playRound(computerSelection(), userSelection());
+    result.textContent = `You chose: ${userChoice}. || The computer chose ${computerChoice}.`;
 
-    // Declare the final winner
-    if (userScore > computerScore) {
-        console.log(
-            `You won ${userScore} out of 5 rounds. You are the winner of the match! 🥳`
-        );
-    } else if (computerScore > userScore) {
-        console.log(
-            `The computer won ${computerScore} out of 5 rounds. You lose the match ☹️`
-        );
+    // Compare userChoice and computerChoice
+    if (userChoice === "rock" && computerChoice === "scissors") {
+        result.textContent += `\r\nRock beats Scissors.\r\nYou won this round!`;
+        userScore++;
+    } else if (userChoice === "paper" && computerChoice === "rock") {
+        result.textContent += `\r\nPaper beats Rock.\r\nYou won this round!`;
+        userScore++;
+    } else if (userChoice === "scissors" && computerChoice === "paper") {
+        result.textContent += `\r\nScissors beats Paper.\r\nYou won this round!`;
+        userScore++;
+    } else if (userChoice === computerChoice) {
+        result.textContent += `\r\nIt's a tie!`;
     } else {
-        console.log(
-            `You won ${userScore} and the computer won ${computerScore} out of 5 rounds. It\'s a tie!`
-        );
-    } */
+        result.textContent += `\r\nYou lose this round!`;
+        computerScore++;
+    }
 }
 
-playGame();
+// Declare the final winner
+/* if (userScore > computerScore) {
+    console.log(
+        `You won ${userScore} out of 5 rounds. You are the winner of the match! 🥳`
+    );
+} else if (computerScore > userScore) {
+    console.log(
+        `The computer won ${computerScore} out of 5 rounds. You lose the match ☹️`
+    );
+} else {
+    console.log(
+        `You won ${userScore} and the computer won ${computerScore} out of 5 rounds. It\'s a tie!`
+    );
+} */
