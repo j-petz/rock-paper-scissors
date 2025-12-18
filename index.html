@@ -9,11 +9,30 @@
 </head>
 
 <body>
-    <button data-value="rock">🪨</button>
-    <button data-value="paper">📃</button>
-    <button data-value="scissors">✂️</button>
-    <div id="result"></div>
-    <div id="score"></div>
+    <main>
+        <h1>Rock Paper Scissors</h1>
+        <p>Select your choice</p>
+        <div class="wrapper">
+            <button data-value="rock">🪨</button>
+            <button data-value="paper">📃</button>
+            <button data-value="scissors">✂️</button>
+        </div>
+        <div class="selection-wrapper">
+            <div>
+                <div class="label">User</div>
+                <div class="selection" id="selection-user"></div>
+            </div>
+            <div>
+                <div class="label">Computer</div>
+                <div class="selection" id="selection-computer"></div>
+            </div>
+        </div>
+        <p id="score">
+        </p>
+        <p id="message">
+        </p>
+        <button id="restart">Restart</button>
+    </main>
 
     <script src="script.js" type="text/javascript"></script>
 </body>
