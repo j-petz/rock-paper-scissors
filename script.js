@@ -23,47 +23,84 @@ let rounds = 0;
 let message = document.querySelector("#message");
 message.setAttribute("style", "white-space: pre");
 
+let scoreUser = document.querySelector(".score-user");
+scoreUser.textContent = userScore;
+
+let scoreComputer = document.querySelector(".score-computer");
+scoreComputer.textContent = computerScore;
+
+let scoreTies = document.querySelector(".ties");
+scoreTies.textContent = ties;
+
+let selectionUser = document.querySelector("#selection-user");
+let selectionComputer = document.querySelector("#selection-computer");
+
 function playRound(e) {
     let userChoice = e.target.dataset.value;
     let computerChoice = getComputerChoice();
 
-    let score = document.querySelector("#score");
-    score.setAttribute("style", "white-space: pre");
+    message.style.padding = "8px";
 
-    message.textContent = `You chose: ${userChoice}. || The computer chose ${computerChoice}.`;
+    let result = document.querySelector("#result");
+    result.setAttribute("style", "white-space: pre");
+
+    selectionUser.textContent = e.target.textContent;
+
+    if (computerChoice === "rock") {
+        selectionComputer.textContent = "🪨";
+    } else if (computerChoice === "paper") {
+        selectionComputer.textContent = "📃";
+    } else if (computerChoice === "scissors") {
+        selectionComputer.textContent = "✂️";
+    }
 
     // Compare userChoice and computerChoice
     if (userChoice === "rock" && computerChoice === "scissors") {
-        message.textContent += `\r\nRock beats Scissors.\r\nYou won this round!`;
+        message.textContent = `Rock beats Scissors.\r\nYou won this round! 😁`;
         userScore++;
     } else if (userChoice === "paper" && computerChoice === "rock") {
-        message.textContent += `\r\nPaper beats Rock.\r\nYou won this round!`;
+        message.textContent = `Paper beats Rock.\r\nYou won this round! 😁`;
         userScore++;
     } else if (userChoice === "scissors" && computerChoice === "paper") {
-        message.textContent += `\r\nScissors beats Paper.\r\nYou won this round!`;
+        message.textContent = `Scissors beats Paper.\r\nYou won this round! 😁`;
         userScore++;
     } else if (userChoice === computerChoice) {
-        message.textContent += `\r\nIt's a tie!`;
+        message.textContent = `It's a tie!`;
         ties++;
     } else if (computerChoice === "rock" && userChoice === "scissors") {
-        message.textContent += `\r\nRock beats Scissors.\r\nYou lose this round!`;
+        message.textContent = `Rock beats Scissors.\r\nYou lose this round! ☹️`;
         computerScore++;
     } else if (computerChoice === "paper" && userChoice === "rock") {
-        message.textContent += `\r\nPaper beats Rock.\r\nYou lose this round!`;
+        message.textContent = `Paper beats Rock.\r\nYou lose this round! ☹️`;
         computerScore++;
     } else if (computerChoice === "scissors" && userChoice === "paper") {
-        message.textContent += `\r\nScissors beats Paper.\r\nYou lose this round!`;
+        message.textContent = `Scissors beats Paper.\r\nYou lose this round! ☹️`;
         computerScore++;
     }
     rounds++;
-    score.textContent = `User: ${userScore} || Computer: ${computerScore} || Ties: ${ties}`;
+    scoreUser.textContent = userScore;
+    scoreComputer.textContent = computerScore;
+    scoreTies.textContent = ties;
+
+    if (userScore > computerScore) {
+        scoreUser.style.color = "goldenrod";
+        scoreComputer.style.color = "#666";
+    } else if (computerScore > userScore) {
+        scoreComputer.style.color = "goldenrod";
+        scoreUser.style.color = "#666";
+    } else {
+        scoreUser.style.color = "#666";
+        scoreComputer.style.color = "#666";
+    }
 
     // Declare the final winner
     if (userScore == 5) {
-        score.textContent += `\r\nYou won ${userScore} out of ${rounds} rounds.\r\nYou are the winner of the match! 🥳`;
+        result.textContent = `You won ${userScore} out of ${rounds} rounds.\r\nYou are the winner of the match! 🥳`;
+        result.style.padding = "8px";
         buttons.forEach((button) => (button.disabled = true));
     } else if (computerScore == 5) {
-        score.textContent += `\r\nThe computer won ${computerScore} out of ${rounds} rounds.\r\nYou lose the match ☹️`;
+        result.textContent = `The computer won ${computerScore} out of ${rounds} rounds.\r\nYou lose the match 😢`;
+        result.style.padding = "8px";
         buttons.forEach((button) => (button.disabled = true));
     }
 }
@@ -77,6 +114,16 @@ function restartGame() {
     userScore = 0;
     computerScore = 0;
     ties = 0;
+    rounds = 0;
+    selectionUser.textContent = "";
+    selectionComputer.textContent = "";
     message.textContent = "";
-    score.textContent = "";
+    message.style.padding = "0";
+    result.textContent = "";
+    result.style.padding = "0";
+    scoreUser.textContent = userScore;
+    scoreComputer.textContent = computerScore;
+    scoreTies.textContent = ties;
+    scoreUser.style.color = "#666";
+    scoreComputer.style.color = "#666";
 }
