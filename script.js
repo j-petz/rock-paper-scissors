@@ -111,10 +111,14 @@ function playRound(e) {
     if (userScore == 5) {
         result.textContent = `You won ${userScore} out of ${rounds} rounds.\r\nYou are the winner of the match! 🥳`;
         result.style.padding = "8px";
+        btnRestart.style.backgroundColor = "goldenrod";
+        btnRestart.style.color = "#222";
         buttons.forEach((button) => (button.disabled = true));
     } else if (computerScore == 5) {
         result.textContent = `The computer won ${computerScore} out of ${rounds} rounds.\r\nYou lose the match 😢`;
         result.style.padding = "8px";
+        btnRestart.style.backgroundColor = "goldenrod";
+        btnRestart.style.color = "#222";
         buttons.forEach((button) => (button.disabled = true));
     }
 }
@@ -142,4 +146,6 @@ function restartGame() {
     scoreTies.textContent = ties;
     scoreUser.style.color = "#666";
     scoreComputer.style.color = "#666";
+    btnRestart.style.backgroundColor = "#333";
+    btnRestart.style.color = "#666";
 }
