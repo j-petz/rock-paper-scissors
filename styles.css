@@ -49,6 +49,10 @@ button {
     border-radius: 8px;
 }
 
+button:disabled {
+    opacity: 0.33;
+}
+
 .wrapper {
     display: flex;
     gap: 1rem;
@@ -62,6 +66,9 @@ button {
 
 .wrapper button:hover {
     border: 4px solid goldenrod;
+}
+.wrapper button:disabled:hover {
+    border: none;
 }
 
 .selection-wrapper {
