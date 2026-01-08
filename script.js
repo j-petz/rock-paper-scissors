@@ -57,24 +57,38 @@ function playRound(e) {
     // Compare userChoice and computerChoice
     if (userChoice === "rock" && computerChoice === "scissors") {
         message.textContent = `Rock beats Scissors.\r\nYou won this round! 😁`;
+        selectionComputer.style.border = "none";
+        selectionUser.style.border = "4px solid goldenrod";
         userScore++;
     } else if (userChoice === "paper" && computerChoice === "rock") {
         message.textContent = `Paper beats Rock.\r\nYou won this round! 😁`;
+        selectionComputer.style.border = "none";
+        selectionUser.style.border = "4px solid goldenrod";
         userScore++;
     } else if (userChoice === "scissors" && computerChoice === "paper") {
         message.textContent = `Scissors beats Paper.\r\nYou won this round! 😁`;
+        selectionComputer.style.border = "none";
+        selectionUser.style.border = "4px solid goldenrod";
         userScore++;
     } else if (userChoice === computerChoice) {
         message.textContent = `It's a tie!`;
+        selectionComputer.style.border = "none";
+        selectionUser.style.border = "none";
         ties++;
     } else if (computerChoice === "rock" && userChoice === "scissors") {
         message.textContent = `Rock beats Scissors.\r\nYou lose this round! ☹️`;
+        selectionUser.style.border = "none";
+        selectionComputer.style.border = "4px solid goldenrod";
         computerScore++;
     } else if (computerChoice === "paper" && userChoice === "rock") {
         message.textContent = `Paper beats Rock.\r\nYou lose this round! ☹️`;
+        selectionUser.style.border = "none";
+        selectionComputer.style.border = "4px solid goldenrod";
         computerScore++;
     } else if (computerChoice === "scissors" && userChoice === "paper") {
         message.textContent = `Scissors beats Paper.\r\nYou lose this round! ☹️`;
+        selectionUser.style.border = "none";
+        selectionComputer.style.border = "4px solid goldenrod";
         computerScore++;
     }
     rounds++;
@@ -117,6 +131,8 @@ function restartGame() {
     rounds = 0;
     selectionUser.textContent = "";
     selectionComputer.textContent = "";
+    selectionUser.style.border = "none";
+    selectionComputer.style.border = "none";
     message.textContent = "";
     message.style.padding = "0";
     result.textContent = "";
